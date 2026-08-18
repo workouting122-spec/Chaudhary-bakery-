@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --nav-h: 76px;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden; /* nothing (incl. the fixed mascot) may cause sideways scroll */
+  }
+
+  body {
+    @apply bg-cream-100 text-ink font-sans antialiased;
+    /* the off-white the cake photography sits on */
+    background: linear-gradient(180deg, #FAF8F5 0%, #F4EFE7 100%);
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display text-ink;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    background: #D4122A;
+    color: #FAF8F5;
+  }
+
+  /* Visible keyboard focus everywhere */
+  :focus-visible {
+    outline: 2px solid #D4122A;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-content px-5 sm:px-8;
+  }
+
+  .eyebrow {
+    @apply font-sans text-xs font-semibold uppercase tracking-widest2 text-ink-faint;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full font-sans
+           font-semibold transition duration-300 ease-smooth focus-visible:outline-2;
+  }
+  .btn-primary {
+    @apply btn bg-brand px-6 py-3 text-cream-50 hover:bg-brand-dark hover:-translate-y-0.5;
+  }
+  .btn-ghost {
+    @apply btn border border-ink/15 bg-transparent px-6 py-3 text-ink hover:border-ink/40;
+  }
+  .btn-gold {
+    @apply btn border border-gold/50 bg-transparent px-6 py-3 text-gold-dark hover:bg-gold/10;
+  }
+
+  .hairline {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-gold/40 to-transparent;
+  }
+}
+
+/* Respect the OS "reduce motion" setting globally as a safety net.
+   Components ALSO branch on this to swap scrubbed video for static frames. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 100;
+  background: #2B2622;
+  color: #FAF8F5;
+  padding: 10px 16px;
+  border-radius: 999px;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 12px;
+}
