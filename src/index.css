@@ -10,7 +10,7 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
-    overflow-x: hidden; /* nothing (incl. the fixed mascot) may cause sideways scroll */
+    overflow-x: hidden; /* nothing may cause sideways scroll */
   }
 
   body {

@@ -171,7 +171,7 @@ export default function CinematicChapter({
     return (
       <section className="relative flex min-h-screen items-center overflow-hidden bg-choc-950">
         <video
-          className="absolute inset-0 h-full w-full object-cover opacity-70"
+          className="absolute inset-0 h-full w-full bg-choc-950 object-cover opacity-70"
           style={{ objectPosition }}
           autoPlay
           loop
@@ -208,7 +208,7 @@ export default function CinematicChapter({
           {/* Z-1 — VIDEO (full-bleed cinematic environment) */}
           <video
             ref={videoRef}
-            className="absolute inset-0 z-[1] h-full w-full object-cover"
+            className="absolute inset-0 z-[1] h-full w-full bg-choc-950 object-cover"
             style={{ objectPosition }}
             muted
             playsInline

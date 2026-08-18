@@ -203,30 +203,6 @@ The four category tiles + Shop filter remain the fixed PRD set
 categories you create still list under "All".
 ---
 
-## The baker mascot (autonomous character — PRD §4.4)
-
-`src/components/home/BakerStage.tsx` renders a friendly 3D chef that travels
-with the scroll and stays "alive":
-
-- **Idle** breathing, randomised blinking, gentle bob.
-- **Look-at** — the head tracks your cursor (or last tap on mobile).
-- **Per-section movement** — it repositions to 8 anchors as you scroll, with a
-  springy transition (never teleports).
-- **Reactions** — a little cheer when you add to cart; after 30s idle it dozes
-  off (💤); moving the mouse back wakes it with a wave.
-- **Accessibility** — respects `prefers-reduced-motion` (calm single pose) and
-  auto-hides below 400px width. The overlay is `pointer-events:none`, so it
-  never blocks content.
-
-It's **procedural** (built from primitives) so it needs no asset and can't
-crash. To use a real rigged model, drop `baker.glb` (with `idle`, `wave`,
-`cheer`, `sleep` clips) into `/public/assets/`, set `BAKER_MODEL_URL =
-"/assets/baker.glb"` at the top of the file, and render a `useGLTF` +
-`useAnimations` component in place of `<ProceduralBaker>` (map each `Mood` to a
-clip). The scroll/positioning/reaction logic stays exactly the same.
-
----
-
 ## Still to confirm before launch (PRD §10 + backend)
 
 - Full shop phone number, exact address + Google Maps embed URL, delivery
@@ -303,8 +279,8 @@ npm run dev        # smoke-test the pages below
 ```
 
 Manual smoke test (≈10 min):
-- Home: hero video, tagline pin, cake-assembly scrub, baker mascot (cursor
-  look, cheer on add-to-cart, nap after 30s), featured products.
+- Home: cinematic brand film (8 scroll-scrubbed chapters), the chocolate-
+  collection transition, then featured products.
 - Shop: search / category / price / sort; Product page: gallery, variant,
   cake message, add to cart, WhatsApp.
 - Cart → Checkout (COD) → Order confirmation. Then check **Admin → Orders**
@@ -313,7 +289,7 @@ Manual smoke test (≈10 min):
   image upload, categories, customers.
 - Responsive: 320 / 360 / 375 / 390 / 414 / 768 / 1024 / 1280 — confirm no
   horizontal scroll (guarded via `overflow-x: hidden` on `html`) and the mobile
-  drawer/cart work. The mascot auto-hides below 400px by design.
+  drawer/cart work.
 - Lighthouse (mobile) on the built `preview` server.
 
 ---
@@ -355,8 +331,8 @@ cannot be executed in-place. Rather than claim otherwise, the code was verified
 by running the **TypeScript compiler** against the source and eliminating every
 *real* error it found:
 
-- Fixed `React.*` UMD-namespace errors (TS2686) in `ProtectedRoute`,
-  `RichText`, `BakerStage` (imported the specific types instead).
+- Fixed `React.*` UMD-namespace errors (TS2686) in `ProtectedRoute` and
+  `RichText` (imported the specific types instead).
 - Fixed a recharts `Tooltip` formatter type-variance error in `Dashboard`.
 - Fixed `waLink` inferring a single string-literal parameter type (typed it
   `string`) — this one would have failed `tsc -b` and broken the Netlify build.

@@ -37,7 +37,7 @@ export default function CinematicIntro() {
       aria-label="Chaudhary Bake & Cake — born from chocolate"
     >
       <video
-        className="absolute inset-0 h-full w-full object-cover opacity-40"
+        className="absolute inset-0 h-full w-full bg-choc-950 object-cover opacity-40"
         autoPlay
         loop
         muted
