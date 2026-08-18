@@ -75,45 +75,43 @@ const chapters: ChapterConfig[] = [
     index: 6,
     total: 8,
     eyebrow: "06 — The Showpiece",
-    headline: (
-      <>
-        Born from chocolate.
-        <br />
-        Crafted for the moments
-        <br />
-        worth remembering.
-      </>
-    ),
-    video: { src: "/assets/hero-360-cake.mp4", mobileSrc: "/assets/hero-360-cake-mobile.mp4" },
+    headline: "Born from chocolate.",
+    body: "Crafted for the moments worth remembering.",
+    cta: { label: "Shop Cakes", to: "/shop" },
+    video: { src: "/assets/clip-06-showpiece.mp4" },
     zone: "left",
-    // Text clears early so the finished cake dominates the final orbit.
+    // Text supports the reveal, then clears so the orbiting cake dominates.
     contentOutAt: 0.5,
     scroll: 2.6,
   },
   {
     index: 7,
     total: 8,
-    eyebrow: "07 — The Signature",
+    eyebrow: "Handcrafted in our atelier",
     headline: (
       <>
         Chaudhary
         <span className="block italic text-gold">Bake &amp; Cake</span>
       </>
     ),
-    body: "Handcrafted chocolate cakes, baked fresh and made to order.",
-    video: { src: "/assets/clip-04-finish.mp4" },
-    zone: "center",
-    objectPosition: "center 30%",
+    body: "Chocolate, crafted beautifully.",
+    // Brand reveal — text sits in the upper-right negative space, kept subtle
+    // so the cake composition stays the hero.
+    video: { src: "/assets/clip-07-brand-reveal.mp4" },
+    zone: "upper-right",
   },
   {
     index: 8,
     total: 8,
-    eyebrow: "08 — Your Moment",
-    headline: "Your moment, made in chocolate.",
-    body: "Order a signature cake, or design your own for the day that matters.",
+    eyebrow: "Your moment",
+    headline: "Make it unforgettable.",
+    body: "Explore handcrafted cakes made for celebrations, gifting and every sweet moment.",
     cta: { label: "Shop Cakes", to: "/shop" },
-    video: { src: "/assets/hero-360-cake.mp4", mobileSrc: "/assets/hero-360-cake-mobile.mp4" },
-    zone: "center",
+    secondaryCta: { label: "Customize Your Cake", to: "/contact" },
+    // The emotional climax — content stays put so both CTAs remain clickable.
+    persist: true,
+    video: { src: "/assets/clip-08-cta.mp4" },
+    zone: "lower-left",
   },
 ];
 

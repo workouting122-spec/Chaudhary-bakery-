@@ -28,11 +28,16 @@ export interface ChapterConfig {
   /** Small, late-appearing line (e.g. "SCROLL TO DISCOVER"). */
   small?: string;
   cta?: { label: string; to: string };
+  /** Optional second CTA (e.g. "Customize your cake" on the final chapter). */
+  secondaryCta?: { label: string; to: string };
   video: { src: string; mobileSrc?: string; poster?: string };
   zone: SafeZone;
   /** progress (0-1) at which the large typography should be gone — for reveals
    *  where the cake must dominate the final stretch (blueprint clip 06). */
   contentOutAt?: number;
+  /** Keep the content on screen through the whole chapter (no exit fade) — used
+   *  by the final CTA so its buttons stay clickable at the climax. */
+  persist?: boolean;
   /** height of the scroll space in viewport multiples (controls scrub length). */
   scroll?: number;
   /** object-position for the full-bleed video, to keep the hero object framed. */
@@ -73,9 +78,11 @@ export default function CinematicChapter({
   body,
   small,
   cta,
+  secondaryCta,
   video,
   zone,
   contentOutAt = 0.86,
+  persist = false,
   scroll = 2.2,
   objectPosition = "center",
 }: ChapterConfig) {
@@ -95,9 +102,14 @@ export default function CinematicChapter({
       vid.pause();
 
       // Scroll drives the frame — never autoplay/loop (blueprint §04).
+      // Skip writes smaller than ~1 frame to avoid thrashing the decoder.
+      let lastSeek = -1;
       const seek = (p: number) => {
         if (isFinite(vid.duration) && vid.duration > 0) {
-          vid.currentTime = Math.min(vid.duration * p, vid.duration - 0.05);
+          const t = Math.min(vid.duration * p, vid.duration - 0.05);
+          if (Math.abs(t - lastSeek) < 0.033) return;
+          lastSeek = t;
+          vid.currentTime = t;
         }
       };
 
@@ -127,7 +139,9 @@ export default function CinematicChapter({
           Math.max(0.78, contentOutAt - 0.06)
         );
       // Exit — text clears before the chapter ends so the frame breathes.
-      tl.to(primary, { autoAlpha: 0, y: -26, duration: 0.12, ease: "power2.in" }, contentOutAt);
+      // The final CTA persists so its buttons stay reachable at the climax.
+      if (!persist)
+        tl.to(primary, { autoAlpha: 0, y: -26, duration: 0.12, ease: "power2.in" }, contentOutAt);
       tl.set({}, {}, 1); // pin timeline length to exactly 1
 
       const st = ScrollTrigger.create({
@@ -188,10 +202,22 @@ export default function CinematicChapter({
           <p className="eyebrow !text-gold-soft">{eyebrow}</p>
           <h2 className="font-display text-display-md font-normal text-cream-50">{headline}</h2>
           {body && <p className="max-w-md text-base leading-relaxed text-cream-200/85">{body}</p>}
-          {cta && (
-            <Link to={cta.to} className="btn-primary pointer-events-auto mt-2 w-fit">
-              {cta.label}
-            </Link>
+          {(cta || secondaryCta) && (
+            <div className="mt-2 flex flex-wrap gap-3">
+              {cta && (
+                <Link to={cta.to} className="btn-primary pointer-events-auto w-fit">
+                  {cta.label}
+                </Link>
+              )}
+              {secondaryCta && (
+                <Link
+                  to={secondaryCta.to}
+                  className="btn pointer-events-auto w-fit border border-cream-50/40 px-6 py-3 text-cream-50 hover:bg-cream-50/10"
+                >
+                  {secondaryCta.label}
+                </Link>
+              )}
+            </div>
           )}
         </div>
       </section>
@@ -238,13 +264,16 @@ export default function CinematicChapter({
           />
 
           {/* Z-3 — CINEMATIC INFORMATION: chapter counter + progress line.
-              Counter sits top-right (below the nav) to clear the WhatsApp FAB. */}
-          <div className="pointer-events-none absolute right-5 top-[calc(var(--nav-h)+3vh)] z-[3] flex items-baseline gap-1 sm:right-10">
-            <span className="font-display text-xl text-cream-50">{pad2(index)}</span>
-            <span className="font-sans text-xs tracking-widest2 text-cream-50/40">/ {pad2(total)}</span>
-          </div>
-          <div className="pointer-events-none absolute bottom-8 left-1/2 z-[3] h-px w-40 -translate-x-1/2 overflow-hidden bg-cream-50/15">
-            <div ref={barRef} className="h-full w-full origin-left scale-x-0 bg-gold" />
+              Bottom-centre keeps it clear of the WhatsApp FAB (bottom-right)
+              and every corner text safe-zone. */}
+          <div className="pointer-events-none absolute bottom-6 left-1/2 z-[3] flex -translate-x-1/2 flex-col items-center gap-2">
+            <div className="flex items-baseline gap-1">
+              <span className="font-display text-lg text-cream-50">{pad2(index)}</span>
+              <span className="font-sans text-[11px] tracking-widest2 text-cream-50/40">/ {pad2(total)}</span>
+            </div>
+            <div className="h-px w-36 overflow-hidden bg-cream-50/15 sm:w-44">
+              <div ref={barRef} className="h-full w-full origin-left scale-x-0 bg-gold" />
+            </div>
           </div>
 
           {/* Z-4/5 — EDITORIAL TYPOGRAPHY + CTA */}
@@ -258,10 +287,22 @@ export default function CinematicChapter({
                 {body}
               </p>
             )}
-            {cta && (
-              <Link to={cta.to} className="ci-cta btn-primary pointer-events-auto z-[5] mt-2 w-fit">
-                {cta.label}
-              </Link>
+            {(cta || secondaryCta) && (
+              <div className="mt-2 flex flex-wrap gap-3">
+                {cta && (
+                  <Link to={cta.to} className="ci-cta btn-primary pointer-events-auto z-[5] w-fit">
+                    {cta.label}
+                  </Link>
+                )}
+                {secondaryCta && (
+                  <Link
+                    to={secondaryCta.to}
+                    className="ci-cta btn pointer-events-auto z-[5] w-fit border border-cream-50/40 px-6 py-3 text-cream-50 hover:bg-cream-50/10"
+                  >
+                    {secondaryCta.label}
+                  </Link>
+                )}
+              </div>
             )}
             {small && (
               <p className="ci-small eyebrow mt-3 !text-[10px] !text-cream-50/60">{small}</p>
