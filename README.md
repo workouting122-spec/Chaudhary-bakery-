@@ -25,22 +25,52 @@ behind glassmorphism content.
 - Damped, interpolated camera/layer motion — scroll expresses *intention*, not raw frames
 - OLED dark (`#050505`), glassmorphism UI, Inter (SF-alternative) typography
 
-Loaded via CDN + import map — **no build step**.
+Libraries are vendored locally in `vendor/` and wired via an import map —
+**no build step, no runtime CDN**.
+
+## Project structure
+
+Everything lives at the **repository root** (no wrapper folder), so any static
+host serves it directly:
+
+```
+index.html          ← entry (must stay at root)
+css/styles.css
+js/                 ← config, scene, phone, scroll, ui, main (ES modules)
+vendor/             ← three.js, gsap, lenis (bundled locally)
+package.json        ← static-site scripts (dev / build / pack)
+scripts/            ← serve.js, build.js, pack.sh
+```
 
 ## Run locally
 
-Because it uses ES modules, serve over HTTP (not `file://`):
+It uses ES modules, so it must be served over HTTP (not opened as `file://`):
 
 ```bash
-cd iphone17
-python3 -m http.server 8080      # or: npx serve .
-# open http://localhost:8080
+npm run dev          # zero-dependency static server → http://localhost:8080
+# or: python3 -m http.server 8080
 ```
 
-## Deploy
+## Build & package
 
-Any static host (GitHub Pages, Netlify, Vercel). Point it at the `iphone17/`
-folder — `index.html` is the entry.
+```bash
+npm run build        # copies the site into ./dist (index.html at dist root)
+npm run pack         # creates iphone17-pro-max-deploy.zip (index.html at zip root)
+```
+
+## Deploy to Hostinger (or any static host)
+
+`index.html` sits at the project root — **upload the root contents directly**
+(or the generated `dist/`), not a wrapping folder.
+
+- **Hostinger (file manager / hPanel):** run `npm run pack`, then upload
+  `iphone17-pro-max-deploy.zip` into `public_html` and extract there. The
+  archive's `index.html` is at its root, so no nested-folder errors.
+- **Hostinger Git / auto-deploy:** `package.json` marks it as a static
+  project; set the publish directory to the repo root (or `dist` if a build
+  step is run).
+- **GitHub Pages / Netlify / Vercel:** point the publish directory at the repo
+  root (build command optional: `npm run build`, output `dist`).
 
 ## Performance & resilience
 

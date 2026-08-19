@@ -1,0 +1,25 @@
+{
+  "name": "iphone17-pro-max-landing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "iPhone 17 Pro Max — scroll-driven 3D landing page (vanilla static site, no build step required).",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/serve.js",
+    "start": "node scripts/serve.js",
+    "preview": "node scripts/serve.js",
+    "build": "node scripts/build.js",
+    "pack": "bash scripts/pack.sh"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "static",
+    "landing-page",
+    "three.js",
+    "gsap",
+    "scroll-animation"
+  ],
+  "license": "MIT"
+}
