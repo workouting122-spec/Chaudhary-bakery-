@@ -42,6 +42,10 @@ export interface ChapterConfig {
   scroll?: number;
   /** object-position for the full-bleed video, to keep the hero object framed. */
   objectPosition?: string;
+  /** How the 16:9 clip fills the viewport. "cover" = full-bleed (process
+   *  shots); "contain" = framed with breathing room so a discrete cake is
+   *  never over-zoomed or cropped (showpiece/brand/CTA). Default "cover". */
+  fit?: "cover" | "contain";
 }
 
 const LEFT_ZONES: SafeZone[] = ["upper-left", "left", "lower-left"];
@@ -83,8 +87,9 @@ export default function CinematicChapter({
   zone,
   contentOutAt = 0.86,
   persist = false,
-  scroll = 2.2,
+  scroll = 2.8,
   objectPosition = "center",
+  fit = "cover",
 }: ChapterConfig) {
   const space = useRef<HTMLDivElement>(null);
   const sticky = useRef<HTMLDivElement>(null);
@@ -121,27 +126,33 @@ export default function CinematicChapter({
       const ctaEl = q(".ci-cta");
       const primary = [...eyebrowEl, ...headlineEl, ...bodyEl, ...ctaEl];
 
-      gsap.set(primary, { autoAlpha: 0, y: 30 });
-      if (smallEl.length) gsap.set(smallEl, { autoAlpha: 0, y: 14 });
+      // Editorial entry: rise + soft-focus resolve (blur 8→0, scale 0.98→1).
+      gsap.set(primary, { autoAlpha: 0, y: 30, scale: 0.98, filter: "blur(8px)" });
+      if (smallEl.length) gsap.set(smallEl, { autoAlpha: 0, y: 14, filter: "blur(6px)" });
+      const enter = { autoAlpha: 1, y: 0, scale: 1, filter: "blur(0px)" };
 
       // Scrubbed choreography timeline — position params are normalised 0→1 so
       // timeline.progress() maps 1:1 onto scroll progress.
       const tl = gsap.timeline({ paused: true });
-      tl.to(eyebrowEl, { autoAlpha: 1, y: 0, duration: 0.13, ease: "power2.out" }, 0.02)
-        .to(headlineEl, { autoAlpha: 1, y: 0, duration: 0.17, ease: "power3.out" }, 0.1)
-        .to(bodyEl, { autoAlpha: 1, y: 0, duration: 0.16, ease: "power2.out" }, 0.22);
+      tl.to(eyebrowEl, { ...enter, duration: 0.13, ease: "power2.out" }, 0.02)
+        .to(headlineEl, { ...enter, duration: 0.17, ease: "power3.out" }, 0.1)
+        .to(bodyEl, { ...enter, duration: 0.16, ease: "power2.out" }, 0.22);
       if (ctaEl.length)
-        tl.to(ctaEl, { autoAlpha: 1, y: 0, duration: 0.16, ease: "power2.out" }, 0.34);
+        tl.to(ctaEl, { ...enter, duration: 0.16, ease: "power2.out" }, 0.34);
       if (smallEl.length)
-        tl.to(smallEl, { autoAlpha: 1, y: 0, duration: 0.1 }, 0.7).to(
+        tl.to(smallEl, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.1 }, 0.7).to(
           smallEl,
-          { autoAlpha: 0, y: -10, duration: 0.1 },
+          { autoAlpha: 0, y: -10, filter: "blur(4px)", duration: 0.1 },
           Math.max(0.78, contentOutAt - 0.06)
         );
-      // Exit — text clears before the chapter ends so the frame breathes.
+      // Exit — text clears with a soft blur before the chapter ends.
       // The final CTA persists so its buttons stay reachable at the climax.
       if (!persist)
-        tl.to(primary, { autoAlpha: 0, y: -26, duration: 0.12, ease: "power2.in" }, contentOutAt);
+        tl.to(
+          primary,
+          { autoAlpha: 0, y: -22, filter: "blur(5px)", duration: 0.12, ease: "power2.in" },
+          contentOutAt
+        );
       tl.set({}, {}, 1); // pin timeline length to exactly 1
 
       const st = ScrollTrigger.create({
@@ -185,7 +196,10 @@ export default function CinematicChapter({
     return (
       <section className="relative flex min-h-screen items-center overflow-hidden bg-choc-950">
         <video
-          className="absolute inset-0 h-full w-full bg-choc-950 object-cover opacity-70"
+          className={cn(
+            "absolute inset-0 h-full w-full bg-choc-950 opacity-70",
+            fit === "contain" ? "object-contain" : "object-cover"
+          )}
           style={{ objectPosition }}
           autoPlay
           loop
@@ -234,7 +248,10 @@ export default function CinematicChapter({
           {/* Z-1 — VIDEO (full-bleed cinematic environment) */}
           <video
             ref={videoRef}
-            className="absolute inset-0 z-[1] h-full w-full bg-choc-950 object-cover"
+            className={cn(
+              "absolute inset-0 z-[1] h-full w-full bg-choc-950",
+              fit === "contain" ? "object-contain" : "object-cover"
+            )}
             style={{ objectPosition }}
             muted
             playsInline

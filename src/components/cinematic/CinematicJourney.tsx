@@ -80,9 +80,11 @@ const chapters: ChapterConfig[] = [
     cta: { label: "Shop Cakes", to: "/shop" },
     video: { src: "/assets/clip-06-showpiece.mp4" },
     zone: "left",
+    // Framed so the finished cake is presented whole, with breathing room.
+    fit: "contain",
     // Text supports the reveal, then clears so the orbiting cake dominates.
     contentOutAt: 0.5,
-    scroll: 2.6,
+    scroll: 3.4,
   },
   {
     index: 7,
@@ -99,6 +101,7 @@ const chapters: ChapterConfig[] = [
     // so the cake composition stays the hero.
     video: { src: "/assets/clip-07-brand-reveal.mp4" },
     zone: "upper-right",
+    fit: "contain",
   },
   {
     index: 8,
@@ -112,6 +115,7 @@ const chapters: ChapterConfig[] = [
     persist: true,
     video: { src: "/assets/clip-08-cta.mp4" },
     zone: "lower-left",
+    fit: "contain",
   },
 ];
 
