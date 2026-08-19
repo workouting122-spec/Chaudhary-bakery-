@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#050505" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23050505'/%3E%3Cpath fill='%237fd7ff' d='M15.77 12.9c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.57-2.74-1.78-3.33-1.8-1.42-.15-2.77.83-3.49.83-.72 0-1.83-.82-3.01-.8-1.55.03-2.97.9-3.76 2.28-1.6 2.78-.41 6.9 1.15 9.16.76 1.1 1.67 2.34 2.86 2.3 1.15-.05 1.58-.75 2.98-.75 1.38 0 1.78.75 3 .72 1.24-.02 2.02-1.12 2.78-2.24.87-1.28 1.23-2.52 1.25-2.58-.03-.02-2.4-.93-2.43-3.67z'/%3E%3C/svg%3E" />
+  <title>iPhone 17 Pro Max — Titanium. Reimagined.</title>
+  <meta name="description" content="Experience the iPhone 17 Pro Max like never before. A cinematic, scroll-driven teardown of the titanium frame, A19 Pro chip, vapor-chamber cooling and periscope camera system." />
+
+  <!-- Google Fonts: Inter as SF-alternative -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="./css/styles.css" />
+
+  <!-- Import map: Three.js core + addons (vendored locally, no CDN) -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./vendor/three/three.module.js",
+      "three/addons/": "./vendor/three/addons/"
+    }
+  }
+  </script>
+
+  <!-- GSAP + ScrollTrigger + Lenis (vendored UMD globals) -->
+  <script defer src="./vendor/gsap/gsap.min.js"></script>
+  <script defer src="./vendor/gsap/ScrollTrigger.min.js"></script>
+  <script defer src="./vendor/lenis/lenis.min.js"></script>
+</head>
+
+<body>
+  <!-- ============ PRELOADER ============ -->
+  <div id="preloader" class="preloader" aria-hidden="true">
+    <div class="preloader__inner">
+      <div class="preloader__logo"></div>
+      <div class="preloader__bar"><span class="preloader__fill" id="preloaderFill"></span></div>
+      <div class="preloader__pct" id="preloaderPct">0%</div>
+      <div class="preloader__label">Loading experience</div>
+    </div>
+  </div>
+
+  <!-- ============ FIXED 3D BACKGROUND CANVAS ============ -->
+  <div id="webgl" class="webgl" aria-hidden="true"></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav glass" id="nav">
+    <div class="nav__brand">
+      <span class="nav__apple"></span>
+      <span class="nav__title">iPhone 17 Pro Max</span>
+    </div>
+    <nav class="nav__links">
+      <a href="#teardown">Design</a>
+      <a href="#camera">Camera</a>
+      <a href="#chip">A19 Pro</a>
+      <a href="#colors">Colors</a>
+    </nav>
+    <a href="#buy" class="nav__cta">Buy</a>
+  </header>
+
+  <!-- ============ SCROLL PROGRESS RAIL ============ -->
+  <div class="scroll-rail" aria-hidden="true"><span id="scrollRailFill"></span></div>
+
+  <!-- ============ CONTENT SECTIONS ============ -->
+  <main id="content">
+
+    <!-- HERO -->
+    <section class="section section--hero" id="hero" data-section="0">
+      <div class="overlay overlay--center" data-fade>
+        <p class="eyebrow">iPhone 17 Pro Max</p>
+        <h1 class="display">Titanium.<br />Reimagined.</h1>
+        <p class="lede">The most advanced iPhone ever engineered — forged in aerospace-grade titanium, powered by the A19 Pro.</p>
+        <div class="hero__scrollcue"><span></span>Scroll to explore</div>
+      </div>
+    </section>
+
+    <!-- SECTION 2 — TEARDOWN -->
+    <section class="section" id="teardown" data-section="1">
+      <div class="overlay overlay--left glass-panel" data-fade>
+        <p class="eyebrow eyebrow--accent">The Teardown</p>
+        <h2 class="headline">Every layer,<br />engineered to disappear.</h2>
+        <p class="body">Seven precision layers separate before your eyes — from the titanium unibody to the OLED display — revealing the architecture behind the thinnest Pro ever.</p>
+        <ul class="spec-chips">
+          <li>Grade-5 Titanium</li>
+          <li>7-layer stack</li>
+          <li>Aerospace bonding</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SECTION 3 — CAMERA -->
+    <section class="section" id="camera" data-section="2">
+      <div class="overlay overlay--right glass-panel" data-fade>
+        <p class="eyebrow eyebrow--accent">Pro Camera System</p>
+        <h2 class="headline">A periscope<br />that sees further.</h2>
+        <p class="body">A tetraprism folds light through a 5&times; optical path, pairing a 48MP fusion main sensor with the largest telephoto ever in iPhone.</p>
+        <div class="stat-row">
+          <div class="stat"><span class="stat__num">5&times;</span><span class="stat__lbl">Optical zoom</span></div>
+          <div class="stat"><span class="stat__num">48MP</span><span class="stat__lbl">Fusion main</span></div>
+          <div class="stat"><span class="stat__num">f/1.6</span><span class="stat__lbl">Aperture</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4 — CHIP -->
+    <section class="section" id="chip" data-section="3">
+      <div class="overlay overlay--left glass-panel" data-fade>
+        <p class="eyebrow eyebrow--accent">A19 Pro Bionic</p>
+        <h2 class="headline">The chip that<br />outruns physics.</h2>
+        <p class="body">A 3nm architecture with a 6-core GPU and hardware ray tracing, cooled by a full vapor chamber — sustained performance that never blinks.</p>
+        <div class="stat-row">
+          <div class="stat"><span class="stat__num">3nm</span><span class="stat__lbl">Process</span></div>
+          <div class="stat"><span class="stat__num">6-core</span><span class="stat__lbl">GPU</span></div>
+          <div class="stat"><span class="stat__num">+40%</span><span class="stat__lbl">Efficiency</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5 — COLORS / REASSEMBLY -->
+    <section class="section" id="colors" data-section="4">
+      <div class="overlay overlay--center" data-fade>
+        <p class="eyebrow eyebrow--accent">Finishes</p>
+        <h2 class="headline headline--center">Choose your titanium.</h2>
+        <div class="swatches" id="swatches">
+          <button class="swatch is-active" data-color="#2b2b2f" data-name="Titanium Black" style="--sw:#2b2b2f" aria-label="Titanium Black"></button>
+          <button class="swatch" data-color="#c9a880" data-name="Desert Titanium" style="--sw:#c9a880" aria-label="Desert Titanium"></button>
+          <button class="swatch" data-color="#b9b6ad" data-name="Natural Titanium" style="--sw:#b9b6ad" aria-label="Natural Titanium"></button>
+          <button class="swatch" data-color="#e4e5e0" data-name="White Titanium" style="--sw:#e4e5e0" aria-label="White Titanium"></button>
+          <button class="swatch" data-color="#4a5a72" data-name="Blue Titanium" style="--sw:#4a5a72" aria-label="Blue Titanium"></button>
+        </div>
+        <p class="swatch__name" id="swatchName">Titanium Black</p>
+      </div>
+    </section>
+
+    <!-- FOOTER / CTA -->
+    <section class="section section--buy" id="buy" data-section="5">
+      <div class="overlay overlay--buyleft" data-fade>
+        <p class="eyebrow eyebrow--accent">Pre-order now</p>
+        <h2 class="headline">Yours from<br />&#8377;1,44,900.</h2>
+        <p class="body">Available in 256GB, 512GB and 1TB. Free engraving and next-day delivery on launch.</p>
+
+        <div class="buy-cards">
+          <article class="buy-card glass-panel">
+            <header class="buy-card__head"><h3>256&nbsp;GB</h3><span class="buy-card__tag">Most popular</span></header>
+            <p class="buy-card__price">&#8377;1,44,900</p>
+            <p class="buy-card__meta">Titanium Black · 6.9&Prime; OLED</p>
+            <button class="buy-card__btn">Pre-order</button>
+          </article>
+          <article class="buy-card glass-panel">
+            <header class="buy-card__head"><h3>512&nbsp;GB</h3></header>
+            <p class="buy-card__price">&#8377;1,64,900</p>
+            <p class="buy-card__meta">All finishes · Free engraving</p>
+            <button class="buy-card__btn">Pre-order</button>
+          </article>
+          <article class="buy-card glass-panel">
+            <header class="buy-card__head"><h3>1&nbsp;TB</h3></header>
+            <p class="buy-card__price">&#8377;1,94,900</p>
+            <p class="buy-card__meta">Pro storage · ProRes ready</p>
+            <button class="buy-card__btn">Pre-order</button>
+          </article>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div class="footer__row">
+          <span class="footer__brand">Chaudhary Store</span>
+          <div class="footer__links">
+            <a href="#hero">Overview</a>
+            <a href="#teardown">Tech Specs</a>
+            <a href="#buy">Buy</a>
+            <a href="#buy">Support</a>
+          </div>
+        </div>
+        <p class="footer__fine">Demo experience. iPhone 17 Pro Max, A19 Pro and titanium finishes shown are illustrative. Not affiliated with Apple Inc.</p>
+      </footer>
+    </section>
+
+  </main>
+
+  <!-- App entry -->
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
