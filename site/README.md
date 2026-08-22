@@ -1,80 +1,78 @@
-# NOVA — Scroll-Driven Product Film
+# NOVA — Engineered in the Open
 
-A cinematic, scroll-driven website. Each video clip becomes a **chapter** that
-"scrubs" frame-by-frame as you scroll — the further you scroll through a section,
-the further the clip plays. Built as a plain static site (no build step), so it
-runs anywhere and deploys to any host.
+A complete, cinematic **mobile shop** website built as a single static site. A
+scroll-scrubbed hero product film plays forward as you scroll down and backward
+as you scroll up, then the page settles into a real store: finishes, camera,
+performance, an interactive charging demo, a gallery, specs, pricing, reviews,
+FAQ, and a reservation form. Every section is animated.
 
-This is the **starter** version wired with the first **5 clips**. It's designed
-so clips **06–15** drop in with almost no work.
+Built to the principles of the **10k-websites** skill: blob-streamed hero with a
+loading ring, frame-rate-independent scrub easing, gated seeks, a four-layer
+text-legibility system, five live static-hero gates, complete-without-video
+fallback, and a plain-language copy gate.
+
+Plain HTML, CSS, and vanilla JavaScript. No build step, no framework.
 
 ## Run it locally
 
-Because browsers stream video with HTTP *range* requests, open it through a real
-web server (not `file://`):
+Video needs a real web server (not `file://`):
 
 ```bash
 cd site
-python3 -m http.server 8000
-# then open http://localhost:8000
+python3 -m http.server 8000    # then open http://localhost:8000
 ```
 
-> Note: use a normal browser (Chrome, Safari, Firefox, Edge). The clips are
-> standard **H.264 / AAC** MP4s, which every real browser plays. (Some headless
-> test browsers ship without the H.264 decoder — that's a test-tool limitation,
-> not the site.)
+Use a normal browser. The clips are standard **H.264 / AAC** MP4s that every
+real browser plays.
 
-## Add clips 06–15 (the whole point)
+## What's on the page
 
-1. Drop the video into `site/assets/videos/` named `clip-06.mp4`, `clip-07.mp4`, …
-2. Open `site/js/clips.js` and add **one entry** per clip to the `CLIPS` array:
+| Section | Animation |
+|---|---|
+| Hero | Scroll-scrubbed product film (4 chapters: teardown → chip → display → reveal) with per-band caption entrances |
+| Meet NOVA | Looping profile clip + spec ticker |
+| Finishes | Three finish cards, each a looping clip |
+| Camera | Dual looping clips + count-up stats |
+| Power | Board clip + count-up stats |
+| Architecture | Exploded clip with self-drawing SVG callout lines |
+| Charge | **Press-and-hold** to fill the battery and light the charging ring |
+| Details | Build-detail clip + feature list |
+| Gallery | Three-clip motion grid |
+| Specs / Pricing / Reviews / FAQ / Reserve | Scroll-reveal, pricing tiers, working reservation form (demo success state) |
 
-```js
-{
-  src:   "assets/videos/clip-06.mp4",
-  label: "Optics",              // short tag shown in the side nav + chapter chip
-  title: "The camera, reimagined.",  // big headline over the clip
-  copy:  "A sensor that sees more light.", // one-line caption
-  scrub: true,                  // true = scrub with scroll (cinematic)
-  length: 2.8,                  // scroll length in screen-heights (optional)
-},
-```
+## The footage (15 clips)
 
-That's it — order in the array is the order on the page. No other file changes.
+- `assets/videos/hero-scrub.mp4` — clips 01, 06, 04, 08 concatenated with
+  crossfades and re-encoded with a short keyframe interval (`-g 8`) for smooth
+  scrubbing.
+- `assets/videos/loop-*.mp4` — the remaining clips, web-optimized for the
+  section loops.
+- `assets/hero-poster.jpg` / `hero-ending.jpg` — first and last hero frames.
 
-## Fields reference
+Raw source clips are kept out of the deploy folder in `../review/raw-clips/`.
 
-| Field    | Meaning |
-|----------|---------|
-| `src`    | Path to the video file |
-| `label`  | Short name in side nav / chapter chip |
-| `title`  | Headline that fades in over the clip |
-| `copy`   | Supporting one-liner (optional) |
-| `scrub`  | `true` = video timeline follows scroll · `false` = clip just autoplays/loops while on screen |
-| `length` | Section height in viewport-heights (default `2.6`). Bigger = slower, more scroll per clip |
+## Editing
 
-## How it works
+- **Copy, prices, specs:** all in `index.html`, in plain text.
+- **Hero chapters and captions:** the `.band` blocks near the top of
+  `index.html` (each has a `data-range`, `data-entrance`, and its headline).
+- **Colors / type:** CSS tokens at the top of `css/style.css`.
+- **Swap a clip:** replace the file in `assets/videos/` (keep the name) or point
+  a `data-src` / the hero encode at a new file.
 
-- Each clip gets a tall section with a **pinned** full-screen stage.
-- As you scroll through that section, the clip's `currentTime` is eased toward a
-  target derived from scroll position (smooth, buttery scrubbing via rAF).
-- Only the active clip (± its neighbours) is kept in memory, so adding many
-  clips stays performant.
-- A top progress bar, per-clip scrub bar, side-chapter nav, and reduced-motion
-  support are all included.
+## Notes
 
-## File map
-
-```
-site/
-├── index.html         # shell: hero, chapters mount point, outro
-├── css/style.css      # all styling / animation
-├── js/clips.js        # ← EDIT THIS to add clips
-├── js/main.js         # scroll + scrub engine (rarely need to touch)
-└── assets/videos/     # clip-01.mp4 … clip-15.mp4
-```
+- NOVA is a **fictional brand** built to demonstrate the format; the phone,
+  prices, specs, and reviews are invented and the footage is AI generated. The
+  footer discloses this.
+- The reservation form is a front-end demo: it shows a success state and stores
+  nothing. To take real reservations, point it at a form service (e.g. Formspree)
+  or a `mailto:` address.
+- There is a faint "Veo" watermark in the lower-right of some source clips (the
+  generator's mark); the stage vignette masks most of it.
 
 ## Deploy
 
-It's fully static — push `site/` to any static host (Netlify, Vercel, GitHub
-Pages, Hostinger, S3+CloudFront, etc.). No server code required.
+Fully static — push the `site/` folder to any static host (Netlify, Vercel,
+GitHub Pages, Hostinger, S3). Patch the `og:url` / `og:image` meta tags (marked
+`DEPLOY STEP` in `index.html`) with the live URL after hosting.
