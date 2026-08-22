@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOVA — Scroll Product Film</title>
+  <meta name="description" content="A cinematic scroll-driven product film. Each chapter scrubs frame-by-frame as you scroll." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Scroll progress bar -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- Fixed brand / nav -->
+  <header class="site-header">
+    <a class="brand" href="#top">NOVA</a>
+    <nav class="chapter-nav" id="chapterNav"></nav>
+  </header>
+
+  <!-- Loading veil -->
+  <div class="loader" id="loader">
+    <div class="loader-ring"></div>
+    <div class="loader-text">Loading film<span class="dots"></span></div>
+    <div class="loader-pct" id="loaderPct">0%</div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <p class="eyebrow">Engineered in motion</p>
+      <h1 class="hero-title">NOVA</h1>
+      <p class="hero-sub">A product film that unfolds as you scroll.</p>
+      <div class="scroll-cue" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="scroll-cue-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chapters get injected here by JS from the CLIPS config -->
+  <main id="chapters"></main>
+
+  <!-- Outro -->
+  <section class="outro">
+    <h2 class="outro-title">NOVA</h2>
+    <p class="outro-sub">The whole story, one scroll.</p>
+    <a class="outro-cta" href="#top">Replay from the top</a>
+    <footer class="outro-foot">Built as a scroll-driven film · Add clips 06–15 to extend</footer>
+  </section>
+
+  <script src="js/clips.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
