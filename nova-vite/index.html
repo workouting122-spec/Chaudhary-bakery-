@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NOVA · Engineered in the Open</title>
+<meta name="description" content="NOVA is a flagship phone that shows its work. Watch it come apart and back together as you scroll, then reserve yours." />
+<meta name="theme-color" content="#0a0b0f" />
+<!-- DEPLOY STEP: set absolute URL after hosting -->
+<meta property="og:title" content="NOVA · Engineered in the Open" />
+<meta property="og:description" content="A flagship phone that shows its work. Watch it come apart and back together." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="/assets/hero-ending.jpg" />
+<meta property="og:url" content="/" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0b0f'/%3E%3Cpath d='M9 23V9l14 14V9' fill='none' stroke='%236c8cff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- fixed environment layer -->
+<div class="env" aria-hidden="true">
+  <div class="env-glow"></div>
+  <div class="env-grain"></div>
+</div>
+
+<!-- top progress -->
+<div class="scrollbar" id="scrollbar" aria-hidden="true"></div>
+
+<!-- nav -->
+<header class="nav" id="nav">
+  <a class="logo" href="#top" aria-label="NOVA home">
+    <svg viewBox="0 0 32 24" width="30" height="22" aria-hidden="true"><path d="M3 21V3l13 18V3M22 3v18M22 3l7 18 0-18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span>NOVA</span>
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#design">Design</a>
+    <a href="#camera">Camera</a>
+    <a href="#power">Power</a>
+    <a href="#buy">Pricing</a>
+  </nav>
+  <a class="btn btn-accent nav-cta" href="#buy">Reserve</a>
+</header>
+
+<main id="main" tabindex="-1">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top" aria-label="NOVA product film">
+  <div class="hero-pin">
+    <div class="stage" id="stage" inert>
+      <div class="poster" id="poster" aria-hidden="true" style="background-image:url('/assets/hero-poster.jpg')"></div>
+      <video id="hero" preload="none" muted playsinline aria-hidden="true" tabindex="-1"></video>
+      <div class="scrim" aria-hidden="true"></div>
+      <svg class="ring" id="ring" viewBox="0 0 48 48" aria-hidden="true">
+        <circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="3"
+                stroke-dasharray="126" style="stroke-dashoffset:var(--ld,126)"/>
+      </svg>
+    </div>
+
+    <!-- caption bands (desktop scrub) -->
+    <div class="bands" id="bands" aria-hidden="true">
+      <div class="band" data-range="0,0.22" data-align="left" data-scrim="0.64" data-entrance="scatter">
+        <p class="kicker">01 · Teardown</p>
+        <h1 class="split" data-text="Nothing to hide.">Nothing to hide.</h1>
+        <p class="band-sub">Every layer, in the open.</p>
+      </div>
+      <div class="band" data-range="0.26,0.5" data-align="right" data-scrim="0.7" data-entrance="punch">
+        <p class="kicker">02 · Silicon</p>
+        <h2 class="split" data-text="The brain, exposed.">The brain, exposed.</h2>
+        <p class="band-sub">A processor you can watch think.</p>
+      </div>
+      <div class="band" data-range="0.54,0.76" data-align="left" data-scrim="0.66" data-entrance="drift">
+        <p class="kicker">03 · Display</p>
+        <h2 class="split" data-text="Light, in layers.">Light, in layers.</h2>
+        <p class="band-sub">A screen built to disappear into the image.</p>
+      </div>
+      <div class="band band-settle" data-range="0.8,1" data-align="center" data-scrim="0.6" data-entrance="rise">
+        <p class="kicker">This is</p>
+        <h2 class="split hero-name" data-text="NOVA">NOVA</h2>
+        <p class="band-sub">Engineered in the open.</p>
+        <div class="band-cta"><a class="btn btn-accent" href="#buy">Reserve yours</a><a class="btn btn-ghost" href="#design">See the phone</a></div>
+      </div>
+    </div>
+
+    <!-- static hero (phones / reduced motion) -->
+    <div class="static-hero" aria-hidden="true">
+      <div class="static-inner">
+        <p class="kicker">NOVA One</p>
+        <h1>This is NOVA.</h1>
+        <p class="static-sub">Engineered in the open. A phone that shows its work.</p>
+        <div class="band-cta"><a class="btn btn-accent" href="#buy">Reserve yours</a><a class="btn btn-ghost" href="#design">See the phone</a></div>
+      </div>
+    </div>
+
+    <div class="scroll-cue" id="scrollCue" aria-hidden="true"><span>Scroll to open it up</span><i></i></div>
+  </div>
+</section>
+
+<!-- ============ INTRO / MEET ============ -->
+<section class="sec sec-intro reveal" id="meet" aria-label="Meet NOVA">
+  <div class="wrap intro-grid">
+    <div class="intro-copy">
+      <p class="kicker">Meet NOVA One</p>
+      <h2 class="big">Most phones hide the hard part.<br><span class="accent-text">This one frames it.</span></h2>
+      <p class="lede">We built NOVA to be looked into, not just at. The same craft that makes it fast and quiet is the craft we put on show. What you saw come apart above is what you hold.</p>
+      <div class="ticker" id="ticker" aria-hidden="true"></div>
+    </div>
+    <div class="intro-media media-frame">
+      <video class="loopv" data-src="/assets/videos/loop-03.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+      <div class="media-tag chip">Titanium unibody · 7.4mm</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DESIGN / FINISHES ============ -->
+<section class="sec sec-design reveal" id="design" aria-label="Design and finishes">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker">Finishes</p>
+      <h2 class="big">Three ways to wear it.</h2>
+      <p class="lede narrow">Every finish is anodised in a single pass, so the colour is the metal, not a coat on top of it.</p>
+    </div>
+    <div class="finish-grid">
+      <article class="finish media-frame">
+        <video class="loopv" data-src="/assets/videos/loop-13.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+        <div class="finish-info"><span class="dot" style="--c:#1b1d22"></span><h3>Obsidian</h3><p>Deep near-black with a mirror back.</p></div>
+      </article>
+      <article class="finish media-frame">
+        <video class="loopv" data-src="/assets/videos/loop-12.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+        <div class="finish-info"><span class="dot" style="--c:#3f6ea6"></span><h3>Tidal Blue</h3><p>A cool blue that shifts with the light.</p></div>
+      </article>
+      <article class="finish media-frame">
+        <video class="loopv" data-src="/assets/videos/loop-15.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+        <div class="finish-info"><span class="dot" style="--c:#c9ccd4"></span><h3>Silver Frost</h3><p>Brushed silver, warm under studio light.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CAMERA ============ -->
+<section class="sec sec-camera reveal" id="camera" aria-label="Camera">
+  <div class="wrap split-media">
+    <div class="split-video media-frame">
+      <video class="loopv" data-src="/assets/videos/loop-09.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+      <video class="loopv split-video-2 media-frame" data-src="/assets/videos/loop-10.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+    </div>
+    <div class="split-copy">
+      <p class="kicker">Camera system</p>
+      <h2 class="big">Built around the lens.</h2>
+      <p class="lede">A 50MP main sensor sits on a stabiliser that moves the glass, not the crop. So low light stays sharp and your hand stays forgiven.</p>
+      <div class="stat-row">
+        <div class="stat"><b data-count="50" data-suffix="MP">0</b><span>main sensor</span></div>
+        <div class="stat"><b data-count="8" data-suffix="k">0</b><span>video</span></div>
+        <div class="stat"><b data-count="16" data-prefix="ƒ/" data-scale="0.1" data-decimals="1">0</b><span>aperture</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ POWER / PERFORMANCE ============ -->
+<section class="sec sec-power reveal" id="power" aria-label="Performance">
+  <div class="wrap split-media reverse">
+    <div class="split-copy">
+      <p class="kicker">Silicon</p>
+      <h2 class="big">Quiet, because it's efficient.</h2>
+      <p class="lede">The N1 chip does more work per watt, so the fan you don't have never has to spin. Fast when you push it, cold when you don't.</p>
+      <div class="stat-row">
+        <div class="stat"><b data-count="3" data-suffix="nm">0</b><span>process</span></div>
+        <div class="stat"><b data-count="18" data-suffix="hr">0</b><span>screen time</span></div>
+        <div class="stat"><b data-count="0" data-static="0°">0°</b><span>throttling</span></div>
+      </div>
+    </div>
+    <div class="split-video media-frame">
+      <video class="loopv" data-src="/assets/videos/loop-02.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ARCHITECTURE / SEE IT ALL ============ -->
+<section class="sec sec-arch reveal" id="arch" aria-label="Architecture">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="kicker">Architecture</p>
+      <h2 class="big">Forty-one parts, one gesture.</h2>
+      <p class="lede narrow">Every piece is placed so the next one can come out with a single tool. Repairable on purpose.</p>
+    </div>
+    <div class="arch-stage media-frame">
+      <video class="loopv" data-src="/assets/videos/loop-05.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+      <svg class="arch-lines" viewBox="0 0 1000 560" preserveAspectRatio="none" aria-hidden="true">
+        <path class="draw" d="M150 90 H360" /><path class="draw" d="M150 230 H320" />
+        <path class="draw" d="M850 150 H640" /><path class="draw" d="M850 330 H600" />
+      </svg>
+      <span class="arch-label chip" style="left:4%;top:12%">Cover glass</span>
+      <span class="arch-label chip" style="left:4%;top:38%">Vapour chamber</span>
+      <span class="arch-label chip" style="right:4%;top:24%">N1 chip</span>
+      <span class="arch-label chip" style="right:4%;top:56%">5,400mAh cell</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTERACTIVE: WIRELESS CHARGING ============ -->
+<section class="sec sec-charge reveal" id="charge" aria-label="Wireless charging demo">
+  <div class="wrap charge-grid">
+    <div class="charge-copy">
+      <p class="kicker">Try it</p>
+      <h2 class="big">Press and hold to charge.</h2>
+      <p class="lede">NOVA tops up the moment it touches the pad. Hold the button to feel it fill, let go and it eases back. No cable, no fuss.</p>
+      <button class="hold-btn" id="holdBtn" aria-describedby="chargeHint">
+        <span class="hold-fill" id="holdFill"></span>
+        <span class="hold-label">Hold to charge</span>
+      </button>
+      <p class="hold-hint mono" id="chargeHint"><span id="chargePct">0</span>% · release to stop</p>
+    </div>
+    <div class="charge-media media-frame">
+      <video class="loopv" id="chargeVideo" data-src="/assets/videos/loop-07.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+      <div class="charge-ring" id="chargeRing" aria-hidden="true"></div>
+      <div class="battery" aria-hidden="true"><i id="battLevel"></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CRAFT DETAILS ============ -->
+<section class="sec sec-craft reveal" id="craft" aria-label="Build details">
+  <div class="wrap split-media">
+    <div class="split-video media-frame wide">
+      <video class="loopv" data-src="/assets/videos/loop-14.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+    </div>
+    <div class="split-copy">
+      <p class="kicker">The details</p>
+      <h2 class="big">Milled, not moulded.</h2>
+      <p class="lede">Speaker grilles drilled one hole at a time. Buttons with a click you can find in the dark. The parts you touch most got the most time.</p>
+      <ul class="tick-list">
+        <li>Symmetrical stereo grilles</li>
+        <li>IP68 water and dust</li>
+        <li>USB‑C 3.2, 40W wired</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section class="sec sec-gallery reveal" id="gallery" aria-label="In motion">
+  <div class="wrap">
+    <div class="sec-head"><p class="kicker">In motion</p><h2 class="big">Every angle.</h2></div>
+    <div class="gallery-grid">
+      <div class="gcell media-frame tall"><video class="loopv" data-src="/assets/videos/loop-15.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div>
+      <div class="gcell media-frame"><video class="loopv" data-src="/assets/videos/loop-10.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div>
+      <div class="gcell media-frame"><video class="loopv" data-src="/assets/videos/loop-11.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SPECS ============ -->
+<section class="sec sec-specs reveal" id="specs" aria-label="Specifications">
+  <div class="wrap">
+    <div class="sec-head"><p class="kicker">Specs</p><h2 class="big">The short version.</h2></div>
+    <div class="spec-table">
+      <div class="spec-row"><span>Display</span><b>6.7" LTPO OLED · 1–120Hz · 2,600 nits</b></div>
+      <div class="spec-row"><span>Chip</span><b>NOVA N1 · 3nm · 8-core</b></div>
+      <div class="spec-row"><span>Camera</span><b>50MP main · 48MP ultra-wide · 64MP tele</b></div>
+      <div class="spec-row"><span>Battery</span><b>5,400mAh · 40W wired · 30W wireless</b></div>
+      <div class="spec-row"><span>Build</span><b>Titanium frame · IP68 · 199g</b></div>
+      <div class="spec-row"><span>Software</span><b>NovaOS · 6 years of updates</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING / BUY ============ -->
+<section class="sec sec-buy reveal" id="buy" aria-label="Pricing">
+  <div class="wrap">
+    <div class="sec-head"><p class="kicker">Reserve NOVA One</p><h2 class="big">Pick your size.</h2><p class="lede narrow">Reserve today, pay nothing now. We hold your place in the first run.</p></div>
+    <div class="price-grid">
+      <article class="price-card">
+        <h3>256<span>GB</span></h3><p class="price">$899</p>
+        <p class="price-note">For most people. Plenty of room.</p>
+        <a class="btn btn-ghost full" href="#reserve">Reserve</a>
+      </article>
+      <article class="price-card featured">
+        <div class="badge">Most reserved</div>
+        <h3>512<span>GB</span></h3><p class="price">$999</p>
+        <p class="price-note">The sweet spot for photos and 8K clips.</p>
+        <a class="btn btn-accent full" href="#reserve">Reserve</a>
+      </article>
+      <article class="price-card">
+        <h3>1<span>TB</span></h3><p class="price">$1,199</p>
+        <p class="price-note">Never think about storage again.</p>
+        <a class="btn btn-ghost full" href="#reserve">Reserve</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section class="sec sec-reviews reveal" id="reviews" aria-label="What people say">
+  <div class="wrap">
+    <div class="sec-head"><p class="kicker">Early hands</p><h2 class="big">People who opened it up.</h2></div>
+    <div class="quote-grid">
+      <blockquote class="quote"><p>"I've had it two weeks and I still haven't seen the battery drop below 40 by bedtime."</p><cite>Priya M. · switched from a 3-year-old flagship</cite></blockquote>
+      <blockquote class="quote"><p>"The fact that I could replace the screen myself sold me. Nobody else lets you do that."</p><cite>Daniel R. · fixes his own gear</cite></blockquote>
+      <blockquote class="quote"><p>"Night shots look like I used a real camera. My old phone smeared everything."</p><cite>Aisha K. · shoots at gigs</cite></blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="sec sec-faq reveal" id="faq" aria-label="Questions">
+  <div class="wrap faq-wrap">
+    <div class="sec-head left"><p class="kicker">Before you reserve</p><h2 class="big">The real questions.</h2></div>
+    <div class="faq-list">
+      <details class="faq"><summary>Does reserving cost anything?<i></i></summary><p>No. Reserving holds your place in the first production run. You only pay when it ships, and you can cancel any time before then.</p></details>
+      <details class="faq"><summary>Can I really repair it myself?<i></i></summary><p>Yes. The screen and battery come out with one tool, and we sell the parts and guides at cost. Doing it yourself does not void your warranty.</p></details>
+      <details class="faq"><summary>How long will it get updates?<i></i></summary><p>Six years of full OS updates and security patches, counted from the ship date, not the announcement.</p></details>
+      <details class="faq"><summary>What happens to my old phone?<i></i></summary><p>Trade it in during checkout and we take the value off your first payment. If it still works, someone else gets it refurbished.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESERVE FORM ============ -->
+<section class="sec sec-reserve reveal" id="reserve" aria-label="Reserve">
+  <div class="wrap reserve-wrap">
+    <div class="reserve-head">
+      <p class="kicker">One step</p>
+      <h2 class="big">Hold your place.</h2>
+      <p class="lede">Leave your name and we'll email you the moment reservations open, with your size locked in.</p>
+    </div>
+    <form class="reserve-form" id="reserveForm" novalidate>
+      <div class="field"><label for="rf-name">Your name</label><input id="rf-name" name="name" type="text" autocomplete="name" placeholder="Alex Kim" required /></div>
+      <div class="field"><label for="rf-email">Email</label><input id="rf-email" name="email" type="email" autocomplete="email" placeholder="you@email.com" required /></div>
+      <div class="field"><label for="rf-size">Size</label>
+        <select id="rf-size" name="size"><option>256GB · $899</option><option selected>512GB · $999</option><option>1TB · $1,199</option></select>
+      </div>
+      <button class="btn btn-accent full" type="submit">Reserve my NOVA</button>
+      <p class="form-note mono" id="formNote">No payment now. We'll only email about your reservation.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot" aria-label="Footer">
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <a class="logo" href="#top"><svg viewBox="0 0 32 24" width="26" height="20" aria-hidden="true"><path d="M3 21V3l13 18V3M22 3v18M22 3l7 18 0-18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>NOVA</span></a>
+      <p>Engineered in the open.</p>
+    </div>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="#design">Design</a><a href="#camera">Camera</a><a href="#power">Power</a>
+      <a href="#specs">Specs</a><a href="#buy">Pricing</a><a href="#faq">FAQ</a>
+    </nav>
+  </div>
+  <p class="disclose">NOVA is a fictional brand created to demonstrate a scroll-driven product site. The phone, prices, specs, and reviews are invented, and the footage is AI generated.</p>
+</footer>
+
+<script src="/js/app.js"></script>
+</body>
+</html>

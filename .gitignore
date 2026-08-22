@@ -1,3 +1,4 @@
 review/
-nova-website.zip
 *.zip
+node_modules/
+dist/
