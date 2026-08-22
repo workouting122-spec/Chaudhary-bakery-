@@ -52,15 +52,55 @@ window.CLIPS = [
   {
     src: "assets/videos/clip-05.mp4",
     label: "Reveal",
-    title: "Meet NOVA.",
-    copy: "The finished product, in full.",
+    title: "The form, revealed.",
+    copy: "Exterior complete. Now look closer.",
     scrub: true,
-    length: 3.2,
+    length: 3.0,
+  },
+  {
+    src: "assets/videos/clip-06.mp4",
+    label: "Architecture",
+    title: "Inside the architecture.",
+    copy: "A structure engineered down to the last millimetre.",
+    scrub: true,
+    length: 3.0,
+  },
+  {
+    src: "assets/videos/clip-07.mp4",
+    label: "Systems",
+    title: "Every system in its place.",
+    copy: "Power, logic and thermals, choreographed as one.",
+    scrub: true,
+    length: 2.8,
+  },
+  {
+    src: "assets/videos/clip-08.mp4",
+    label: "Precision",
+    title: "Assembled to the micron.",
+    copy: "Each component seated with absolute precision.",
+    scrub: true,
+    length: 3.0,
+  },
+  {
+    src: "assets/videos/clip-09.mp4",
+    label: "Optics",
+    title: "See in a new light.",
+    copy: "A camera system tuned for every frame.",
+    scrub: true,
+    length: 2.8,
+  },
+  {
+    src: "assets/videos/clip-10.mp4",
+    label: "NOVA",
+    title: "Meet NOVA.",
+    copy: "Everything, together. Experience the whole.",
+    scrub: true,
+    length: 3.4,
   },
 
-  /* --- Clips 06–15 go here when you upload them ---
-  { src: "assets/videos/clip-06.mp4", label: "…", title: "…", copy: "…", scrub: true },
-  { src: "assets/videos/clip-07.mp4", label: "…", title: "…", copy: "…", scrub: true },
+  /* --- Clips 11–15 go here when you upload them ---
+  { src: "assets/videos/clip-11.mp4", label: "…", title: "…", copy: "…", scrub: true },
+  { src: "assets/videos/clip-12.mp4", label: "…", title: "…", copy: "…", scrub: true },
   ... up to clip-15
   */
 ];
