@@ -2,6 +2,7 @@ import Backdrop from "@/components/cine/Backdrop";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { amenities } from "@/data/site-content";
+import { isVideo } from "@/lib/utils";
 
 /**
  * SCENE — Amenities. Not a card grid: an asymmetric editorial mosaic of tall
@@ -33,7 +34,7 @@ export default function Amenities() {
                 delay={i * 90}
                 className={`group relative overflow-hidden rounded-lg ${layouts[i % 4]}`}
               >
-                <Backdrop tone={a.tone} variant={i % 2 === 0 ? "interior" : "landscape"} dim={0.4} grain={false} />
+                <Backdrop tone={a.tone} variant={i % 2 === 0 ? "interior" : "landscape"} media={a.media} video={isVideo(a.media)} alt={a.title} dim={0.4} grain={false} />
                 <div className="absolute inset-0 z-10 flex flex-col justify-end p-7">
                   <h3 className="font-display text-2xl text-bone text-shadow-cine transition-transform duration-500 ease-smooth group-hover:-translate-y-1">
                     {a.title}

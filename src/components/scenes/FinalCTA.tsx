@@ -4,6 +4,8 @@ import { useGSAP } from "@gsap/react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import Backdrop from "@/components/cine/Backdrop";
 import { site, telLink } from "@/config/site";
+import { featured } from "@/data/residence";
+import { isVideo } from "@/lib/utils";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 /**
@@ -37,7 +39,7 @@ export default function FinalCTA() {
 
   return (
     <section id="cta" ref={root} className="relative flex min-h-[100svh] items-center overflow-hidden">
-      <Backdrop tone="dusk" variant="exterior" dim={0.5} />
+      <Backdrop tone="dusk" variant="exterior" media={featured.media} video={isVideo(featured.media)} alt={featured.name} dim={0.5} />
       <div className="container-x relative z-10 text-center">
         <p className="eyebrow mb-6">{site.established}</p>
         <h2 className="mx-auto max-w-4xl text-display-lg text-shadow-cine">

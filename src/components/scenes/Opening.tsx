@@ -7,6 +7,7 @@ import ScrollIndicator from "@/components/ui/ScrollIndicator";
 import { site } from "@/config/site";
 import { featured } from "@/data/residence";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { isVideo } from "@/lib/utils";
 
 export default function Opening() {
   const root = useRef<HTMLDivElement>(null);
@@ -56,7 +57,7 @@ export default function Opening() {
 
   return (
     <section id="top" ref={root} className="relative h-[100svh] w-full overflow-hidden">
-      <Backdrop tone="dusk" variant="exterior" dim={0.42} />
+      <Backdrop tone="dusk" variant="exterior" media={featured.media} video={isVideo(featured.media)} alt={featured.name} dim={0.42} />
 
       <div
         data-hero-content

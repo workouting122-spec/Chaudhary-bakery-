@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Backdrop from "@/components/cine/Backdrop";
 import { tour } from "@/data/residence";
-import { clamp } from "@/lib/utils";
+import { clamp, isVideo } from "@/lib/utils";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import type { ArtVariant } from "@/components/cine/SceneArt";
 
@@ -72,7 +72,7 @@ export default function HouseTour() {
       <section id="tour" ref={sectionRef} className="bg-ink-900">
         {tour.map((stop) => (
           <div key={stop.id} className="relative min-h-[90svh] w-full overflow-hidden">
-            <Backdrop tone={stop.tone} variant={variantFor(stop.room)} dim={0.45} grain={false} />
+            <Backdrop tone={stop.tone} variant={variantFor(stop.room)} media={stop.media} video={isVideo(stop.media)} alt={stop.room} dim={0.45} grain={false} />
             <RoomCopy stop={stop} animate={false} />
           </div>
         ))}
@@ -106,7 +106,7 @@ export default function HouseTour() {
               className="absolute inset-0 will-change-transform"
               style={{ transform: "scale(1.06)" }}
             >
-              <Backdrop tone={stop.tone} variant={variantFor(stop.room)} dim={0.42} />
+              <Backdrop tone={stop.tone} variant={variantFor(stop.room)} media={stop.media} video={isVideo(stop.media)} alt={stop.room} dim={0.42} />
             </div>
           </div>
         ))}

@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import Backdrop from "@/components/cine/Backdrop";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { collection } from "@/data/collection";
-import { clamp } from "@/lib/utils";
+import { clamp, isVideo } from "@/lib/utils";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import type { Residence } from "@/types";
 
@@ -111,7 +111,7 @@ function CollectionCard({ r, className }: { r: Residence; className?: string }) 
   return (
     <article className={`group relative aspect-[3/4] overflow-hidden rounded-lg ${className ?? ""}`} style={{ aspectRatio: "3 / 4" }}>
       <div className="absolute inset-0 transition-transform duration-700 ease-smooth group-hover:scale-105">
-        <Backdrop tone={r.tone} variant={r.tone === "garden" ? "landscape" : "exterior"} dim={0.4} grain={false} />
+        <Backdrop tone={r.tone} variant={r.tone === "garden" ? "landscape" : "exterior"} media={r.media} video={isVideo(r.media)} alt={r.name} dim={0.4} grain={false} />
       </div>
       <div className="absolute inset-0 z-10 flex flex-col justify-between p-6">
         <div className="flex items-start justify-between">

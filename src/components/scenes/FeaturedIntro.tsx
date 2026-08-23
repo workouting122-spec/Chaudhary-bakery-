@@ -3,6 +3,7 @@ import { useGSAP } from "@gsap/react";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import Backdrop from "@/components/cine/Backdrop";
 import { featured } from "@/data/residence";
+import { isVideo } from "@/lib/utils";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 /**
@@ -62,7 +63,7 @@ export default function FeaturedIntro() {
           data-frame
           className="relative aspect-[16/10] w-full overflow-hidden rounded-lg sm:aspect-[21/9]"
         >
-          <Backdrop tone={featured.tone} variant="exterior" dim={0.3} />
+          <Backdrop tone={featured.tone} variant="exterior" media={featured.media} video={isVideo(featured.media)} alt={featured.name} dim={0.3} />
           <div className="absolute bottom-6 left-6 z-10">
             <p className="font-display text-xl text-bone text-shadow-cine sm:text-2xl">
               Begin the walk-through below

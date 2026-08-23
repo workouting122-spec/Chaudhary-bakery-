@@ -5,6 +5,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import { featured } from "@/data/residence";
 import { collection } from "@/data/collection";
+import { isVideo } from "@/lib/utils";
 
 /** A calm, editorial index of the full portfolio (featured + collection). */
 export default function Residences() {
@@ -36,7 +37,7 @@ export default function Residences() {
               className="group relative aspect-[4/5] overflow-hidden rounded-lg"
             >
               <div className="absolute inset-0 transition-transform duration-700 ease-smooth group-hover:scale-105">
-                <Backdrop tone={r.tone} variant={r.tone === "garden" ? "landscape" : "exterior"} dim={0.4} grain={false} />
+                <Backdrop tone={r.tone} variant={r.tone === "garden" ? "landscape" : "exterior"} media={r.media} video={isVideo(r.media)} alt={r.name} dim={0.4} grain={false} />
               </div>
               <div className="absolute inset-0 z-10 flex flex-col justify-between p-6">
                 <span className="plate self-start px-3 py-1 text-[10px] uppercase tracking-widest text-bone">

@@ -5,9 +5,10 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
 import Backdrop from "@/components/cine/Backdrop";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
-import { landmarks } from "@/data/site-content";
+import { landmarks, locationMedia } from "@/data/site-content";
 import { site } from "@/config/site";
 import { featured } from "@/data/residence";
+import { isVideo } from "@/lib/utils";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 /**
@@ -40,7 +41,7 @@ export default function Location() {
 
   return (
     <section id="location" ref={root} className="relative overflow-hidden py-[16vh]">
-      <Backdrop tone="dawn" variant="landscape" dim={0.55} />
+      <Backdrop tone="dawn" variant="landscape" media={locationMedia} video={isVideo(locationMedia)} alt="Aerial view of the setting" dim={0.55} />
       <div className="container-x relative z-10">
         <SectionHeading
           eyebrow="The setting"

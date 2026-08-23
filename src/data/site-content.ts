@@ -1,12 +1,17 @@
 import type { Landmark, Testimonial, Stat, TourStop } from "@/types";
 
-/** SCENE — Amenities. Kept as a curated shortlist, not a feature dump. */
-export const amenities: { title: string; copy: string; tone: TourStop["tone"] }[] = [
+/** SCENE — Amenities. Kept as a curated shortlist, not a feature dump.
+ *  `media` is optional — add a photo/video path to replace the generated art. */
+export const amenities: { title: string; copy: string; tone: TourStop["tone"]; media?: string }[] = [
   { title: "Infinity Pool", copy: "An 18-metre mirror edge that folds the horizon back into the house.", tone: "dusk" },
   { title: "Private Spa", copy: "Steam, sauna and a stone plunge pool set below grade in cool quiet.", tone: "cool-interior" },
   { title: "Cellar & Tasting", copy: "A temperature-held cellar for 1,500 bottles with a private tasting table.", tone: "night" },
   { title: "Garden & Orchard", copy: "Mature landscaping, a walled kitchen garden and a standing orchard.", tone: "garden" },
 ];
+
+/** SCENE — Location. Optional aerial/establishing clip behind the connectivity
+ *  list; leave "" to use the generated landscape. */
+export const locationMedia = ""; // e.g. "/assets/location/aerial.mp4"
 
 /** SCENE — Location. Distances are illustrative placeholders. */
 export const landmarks: Landmark[] = [

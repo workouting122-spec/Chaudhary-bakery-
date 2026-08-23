@@ -1,6 +1,13 @@
 import type { Residence, TourStop } from "@/types";
 
-/** THE MAIN CHARACTER — the featured residence the whole journey tours. */
+/**
+ * THE MAIN CHARACTER — the featured residence the whole journey tours.
+ *
+ * ADDING VIDEO/PHOTO: set `media` to a file in /public (e.g. a 16:9 exterior
+ * clip). It's used by the hero (Opening), the featured title card and the final
+ * CTA. `.mp4/.webm/.mov` render as autoplaying muted loops; images render too.
+ * Leave it unset to keep the generated architectural scene.
+ */
 export const featured: Residence = {
   id: "meridian-house",
   name: "The Meridian House",
@@ -13,9 +20,15 @@ export const featured: Residence = {
   tone: "dusk",
   blurb:
     "A single, uninterrupted volume of light and stone. Meridian is designed to be walked, not scanned — each room opening onto the next like a held breath.",
+  // media: "/assets/hero/exterior-dusk.mp4",
 };
 
-/** The pinned camera path. Order defines the scroll sequence. */
+/**
+ * The pinned camera path. Order defines the scroll sequence.
+ * Each stop takes an optional `media` (e.g. "/assets/tour/living.mp4") that
+ * replaces the generated room art — see the animation prompt pack for one clip
+ * per room. Videos autoplay muted + loop; keep them 16:9.
+ */
 export const tour: TourStop[] = [
   {
     id: "exterior",
@@ -28,6 +41,7 @@ export const tour: TourStop[] = [
       { label: "Elevation", value: "Board-formed concrete" },
       { label: "Approach", value: "120 m private drive" },
     ],
+    // media: "/assets/tour/exterior.mp4",
   },
   {
     id: "entrance",
