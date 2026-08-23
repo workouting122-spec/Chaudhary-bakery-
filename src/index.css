@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --nav-h: 72px;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden; /* the journey is vertical only — never sideways */
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ink-900 text-bone font-sans antialiased;
+    /* deep architectural night the whole tour is lit against */
+    background-color: #0E0F12;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display text-bone;
+    text-wrap: balance;
+    font-weight: 400;
+  }
+
+  ::selection {
+    background: #B79268;
+    color: #0E0F12;
+  }
+
+  :focus-visible {
+    outline: 2px solid #CBA97F;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  img, video {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-content px-5 sm:px-8 lg:px-12;
+  }
+
+  .eyebrow {
+    @apply font-sans text-[11px] font-semibold uppercase tracking-widest2 text-brass;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full font-sans text-sm
+           font-semibold tracking-wide transition duration-300 ease-smooth;
+  }
+  .btn-primary {
+    @apply btn bg-brass px-7 py-3.5 text-ink-950 hover:bg-brass-light hover:-translate-y-0.5;
+  }
+  .btn-ghost {
+    @apply btn border border-bone/20 bg-transparent px-7 py-3.5 text-bone
+           hover:border-brass hover:text-brass;
+  }
+
+  /* thin brass rule used as a scene divider / "camera timeline" tick */
+  .hairline {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-brass/40 to-transparent;
+  }
+
+  /* frosted architectural label plate for property-info overlays */
+  .plate {
+    @apply rounded-lg border border-bone/10 bg-ink-950/50 backdrop-blur-md;
+  }
+}
+
+@layer utilities {
+  /* clip-path reveal helpers driven by GSAP */
+  .clip-hidden { clip-path: inset(0 0 100% 0); }
+  .clip-shown  { clip-path: inset(0 0 0% 0); }
+
+  .text-shadow-cine { text-shadow: 0 2px 40px rgba(0,0,0,0.6); }
+
+  /* pause-safe grain layer */
+  .grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  }
+}
+
+/* House-tour room copy transition (keyed remount as the camera changes rooms) */
+@keyframes tour-copy-in {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    clip-path: inset(0 0 0% 0);
+  }
+}
+.tour-copy-enter {
+  animation: tour-copy-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tour-copy-enter {
+    animation: none;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 100;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: #B79268;
+  color: #0E0F12;
+  font-weight: 600;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 12px;
+}
+
+/* Global reduced-motion safety net. Scenes ALSO branch on the JS hook to
+   render static compositions instead of scrubbed camera moves. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
