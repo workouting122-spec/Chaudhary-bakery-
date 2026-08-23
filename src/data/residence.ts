@@ -20,7 +20,7 @@ export const featured: Residence = {
   tone: "dusk",
   blurb:
     "A single, uninterrupted volume of light and stone. Meridian is designed to be walked, not scanned — each room opening onto the next like a held breath.",
-  // media: "/assets/hero/exterior-dusk.mp4",
+  media: "/assets/hero/exterior-dusk.mp4",
 };
 
 /**
@@ -54,6 +54,7 @@ export const tour: TourStop[] = [
       { label: "Ceiling", value: "6.2 m double height" },
       { label: "Door", value: "4 m bronze pivot" },
     ],
+    media: "/assets/tour/entrance.mp4",
   },
   {
     id: "living",
@@ -66,6 +67,7 @@ export const tour: TourStop[] = [
       { label: "Glazing", value: "Full-height, frameless" },
       { label: "Span", value: "14 m uninterrupted" },
     ],
+    media: "/assets/tour/living.mp4",
   },
   {
     id: "dining",
@@ -78,6 +80,7 @@ export const tour: TourStop[] = [
       { label: "Seating", value: "For twelve" },
       { label: "Light", value: "12 m linear skylight" },
     ],
+    media: "/assets/tour/dining.mp4",
   },
   {
     id: "kitchen",

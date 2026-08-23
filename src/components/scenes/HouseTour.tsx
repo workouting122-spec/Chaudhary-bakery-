@@ -106,7 +106,7 @@ export default function HouseTour() {
               className="absolute inset-0 will-change-transform"
               style={{ transform: "scale(1.06)" }}
             >
-              <Backdrop tone={stop.tone} variant={variantFor(stop.room)} media={stop.media} video={isVideo(stop.media)} alt={stop.room} dim={0.42} />
+              <Backdrop tone={stop.tone} variant={variantFor(stop.room)} media={stop.media} video={isVideo(stop.media)} playing={i === active} alt={stop.room} dim={0.42} />
             </div>
           </div>
         ))}

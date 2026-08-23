@@ -1,6 +1,7 @@
-import { forwardRef } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import type { SceneTone } from "@/types";
 import { cn } from "@/lib/utils";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { TONES } from "./tones";
 import SceneArt, { type ArtVariant } from "./SceneArt";
 
@@ -15,6 +16,8 @@ interface Props {
   /** 0–1 darkening so overlaid text always meets contrast. */
   dim?: number;
   grain?: boolean;
+  /** Gate video playback (e.g. only the active tour room). Default true. */
+  playing?: boolean;
   className?: string;
 }
 
@@ -23,25 +26,57 @@ interface Props {
  * real photo/video when supplied), graded by `tone`, finished with a cinematic
  * vignette + optional film grain. Absolutely fills its positioned parent.
  * The inner `[data-parallax]` node is what scenes translate for camera moves.
+ *
+ * Video playback is gated so we never decode many clips at once: a clip plays
+ * only when it is on-screen AND `playing` (the active layer) AND motion is
+ * allowed — otherwise it pauses and holds its first frame.
  */
 const Backdrop = forwardRef<HTMLDivElement, Props>(function Backdrop(
-  { tone, variant = "interior", media, video, poster, alt = "", dim = 0.35, grain = true, className },
+  { tone, variant = "interior", media, video, poster, alt = "", dim = 0.35, grain = true, playing = true, className },
   ref
 ) {
   const p = TONES[tone];
+  const vidRef = useRef<HTMLVideoElement>(null);
+  const [inView, setInView] = useState(false);
+  const reduced = useReducedMotion();
+  const isVid = !!media && !!video;
+
+  // Only observe/decode when this is actually a video backdrop.
+  useEffect(() => {
+    if (!isVid) return;
+    const el = vidRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { threshold: 0.05 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [isVid]);
+
+  useEffect(() => {
+    if (!isVid) return;
+    const el = vidRef.current;
+    if (!el) return;
+    if (playing && inView && !reduced) {
+      el.play().catch(() => {});
+    } else {
+      el.pause();
+    }
+  }, [isVid, playing, inView, reduced]);
+
   return (
     <div ref={ref} className={cn("absolute inset-0 overflow-hidden", className)} aria-hidden={!media}>
       {/* parallax plate — slightly oversized so translate never exposes an edge */}
       <div data-parallax className="absolute inset-[-8%]">
         {media ? (
-          video ? (
+          isVid ? (
             <video
+              ref={vidRef}
               className="h-full w-full object-cover"
-              autoPlay
               muted
               loop
               playsInline
+              preload="metadata"
               poster={poster}
+              aria-label={alt || undefined}
             >
               <source src={media} />
             </video>
