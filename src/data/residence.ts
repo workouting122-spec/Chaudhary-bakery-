@@ -93,6 +93,7 @@ export const tour: TourStop[] = [
       { label: "Island", value: "5 m single slab" },
       { label: "Beyond", value: "Full working scullery" },
     ],
+    media: "/assets/tour/kitchen.mp4",
   },
   {
     id: "bedroom",
@@ -105,6 +106,7 @@ export const tour: TourStop[] = [
       { label: "Aspect", value: "Due east" },
       { label: "Suite", value: "Dressing + study" },
     ],
+    media: "/assets/tour/bedroom.mp4",
   },
   {
     id: "bathroom",
@@ -117,6 +119,7 @@ export const tour: TourStop[] = [
       { label: "Tub", value: "Single-block stone" },
       { label: "Opens to", value: "Private courtyard" },
     ],
+    media: "/assets/tour/bathroom.mp4",
   },
   {
     id: "terrace",
