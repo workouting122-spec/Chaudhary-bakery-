@@ -11,7 +11,7 @@ export const amenities: { title: string; copy: string; tone: TourStop["tone"]; m
 
 /** SCENE — Location. Optional aerial/establishing clip behind the connectivity
  *  list; leave "" to use the generated landscape. */
-export const locationMedia = ""; // e.g. "/assets/location/aerial.mp4"
+export const locationMedia = "/assets/location/aerial.mp4";
 
 /** SCENE — Location. Distances are illustrative placeholders. */
 export const landmarks: Landmark[] = [

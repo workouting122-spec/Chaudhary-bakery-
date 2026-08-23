@@ -18,6 +18,9 @@ interface Props {
   grain?: boolean;
   /** Gate video playback (e.g. only the active tour room). Default true. */
   playing?: boolean;
+  /** Oversize the plate so a scene can parallax-translate it without exposing
+   *  an edge. Off by default — the frame then sits still and un-zoomed. */
+  parallax?: boolean;
   className?: string;
 }
 
@@ -32,7 +35,7 @@ interface Props {
  * allowed — otherwise it pauses and holds its first frame.
  */
 const Backdrop = forwardRef<HTMLDivElement, Props>(function Backdrop(
-  { tone, variant = "interior", media, video, poster, alt = "", dim = 0.35, grain = true, playing = true, className },
+  { tone, variant = "interior", media, video, poster, alt = "", dim = 0.35, grain = true, playing = true, parallax = false, className },
   ref
 ) {
   const p = TONES[tone];
@@ -64,8 +67,9 @@ const Backdrop = forwardRef<HTMLDivElement, Props>(function Backdrop(
 
   return (
     <div ref={ref} className={cn("absolute inset-0 overflow-hidden", className)} aria-hidden={!media}>
-      {/* parallax plate — slightly oversized so translate never exposes an edge */}
-      <div data-parallax className="absolute inset-[-8%]">
+      {/* plate — oversized only when a scene will parallax-translate it, so a
+          still frame is shown un-zoomed (object-cover crops to fill either way) */}
+      <div data-parallax className={cn("absolute", parallax ? "inset-[-8%]" : "inset-0")}>
         {media ? (
           isVid ? (
             <video

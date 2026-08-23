@@ -19,14 +19,18 @@ export default function FeaturedIntro() {
     () => {
       if (reduced) return;
       const frame = root.current?.querySelector<HTMLElement>("[data-frame]");
-      const plate = root.current?.querySelector<HTMLElement>("[data-parallax]");
-      if (!frame || !plate) return;
+      if (!frame) return;
 
-      gsap.timeline({
-        scrollTrigger: { trigger: root.current, start: "top 80%", end: "top 20%", scrub: 0.5 },
-      })
-        .fromTo(frame, { clipPath: "inset(12% 12% 12% 12% round 8px)" }, { clipPath: "inset(0% 0% 0% 0% round 8px)", ease: "none" }, 0)
-        .fromTo(plate, { scale: 1.25 }, { scale: 1.05, ease: "none" }, 0);
+      // A clip-path wipe reveals the frame — no scaling of the video itself.
+      gsap.fromTo(
+        frame,
+        { clipPath: "inset(12% 12% 12% 12% round 8px)" },
+        {
+          clipPath: "inset(0% 0% 0% 0% round 8px)",
+          ease: "none",
+          scrollTrigger: { trigger: root.current, start: "top 80%", end: "top 20%", scrub: 0.5 },
+        }
+      );
 
       gsap.from("[data-spec]", {
         y: 24,

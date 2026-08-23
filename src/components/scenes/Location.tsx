@@ -41,7 +41,7 @@ export default function Location() {
 
   return (
     <section id="location" ref={root} className="relative overflow-hidden py-[16vh]">
-      <Backdrop tone="dawn" variant="landscape" media={locationMedia} video={isVideo(locationMedia)} alt="Aerial view of the setting" dim={0.55} />
+      <Backdrop tone="dawn" variant="landscape" media={locationMedia} video={isVideo(locationMedia)} alt="Aerial view of the setting" dim={0.55} parallax />
       <div className="container-x relative z-10">
         <SectionHeading
           eyebrow="The setting"

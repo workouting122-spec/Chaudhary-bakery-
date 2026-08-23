@@ -17,21 +17,18 @@ export default function Opening() {
   useGSAP(
     () => {
       if (reduced) return;
-      const plate = root.current?.querySelector<HTMLElement>("[data-parallax]");
       const content = root.current?.querySelector<HTMLElement>("[data-hero-content]");
 
-      // camera dolly: as we scroll out of the opening, the exterior recedes
-      // and the title lifts — establishing scroll-as-camera immediately.
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: root.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 0.6,
-        },
-      });
-      if (plate) tl.to(plate, { yPercent: 14, scale: 1.12, ease: "none" }, 0);
-      if (content) tl.to(content, { yPercent: -22, opacity: 0, ease: "none" }, 0);
+      // The clip carries its own camera move, so the frame stays still (no zoom).
+      // Only the title lifts and fades as we scroll past the opening.
+      if (content) {
+        gsap.to(content, {
+          yPercent: -22,
+          opacity: 0,
+          ease: "none",
+          scrollTrigger: { trigger: root.current, start: "top top", end: "bottom top", scrub: 0.6 },
+        });
+      }
 
       // entrance: title clip-reveal on load
       gsap.from("[data-title-line]", {

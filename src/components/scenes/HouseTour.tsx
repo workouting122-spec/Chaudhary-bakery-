@@ -23,7 +23,6 @@ const variantFor = (room: string): ArtVariant => {
  */
 export default function HouseTour() {
   const sectionRef = useRef<HTMLElement>(null);
-  const plateRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [active, setActive] = useState(0);
   const reduced = useReducedMotion();
 
@@ -42,15 +41,10 @@ export default function HouseTour() {
       const idx = clamp(Math.floor(scaled), 0, tour.length - 1);
       const local = clamp(scaled - idx, 0, 1);
 
+      void local;
       setActive((prev) => (prev === idx ? prev : idx));
-
-      // ken-burns on the active plate only
-      const el = plateRefs.current[idx];
-      if (el) {
-        const scale = 1.06 + local * 0.09;
-        const y = (local - 0.5) * 4; // subtle vertical drift
-        el.style.transform = `scale(${scale}) translateY(${y}%)`;
-      }
+      // No frame zoom: each clip carries its own camera move, and scroll-driven
+      // scaling of the video reads poorly. Rooms simply crossfade.
     };
 
     const onScroll = () => {
@@ -99,15 +93,7 @@ export default function HouseTour() {
             style={{ opacity: i === active ? 1 : 0 }}
             aria-hidden={i !== active}
           >
-            <div
-              ref={(el) => {
-                plateRefs.current[i] = el;
-              }}
-              className="absolute inset-0 will-change-transform"
-              style={{ transform: "scale(1.06)" }}
-            >
-              <Backdrop tone={stop.tone} variant={variantFor(stop.room)} media={stop.media} video={isVideo(stop.media)} playing={i === active} alt={stop.room} dim={0.42} />
-            </div>
+            <Backdrop tone={stop.tone} variant={variantFor(stop.room)} media={stop.media} video={isVideo(stop.media)} playing={i === active} alt={stop.room} dim={0.42} />
           </div>
         ))}
 

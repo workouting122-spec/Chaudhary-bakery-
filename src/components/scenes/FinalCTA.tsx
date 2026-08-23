@@ -20,18 +20,7 @@ export default function FinalCTA() {
   useGSAP(
     () => {
       if (reduced) return;
-      const plate = root.current?.querySelector<HTMLElement>("[data-parallax]");
-      if (plate) {
-        gsap.fromTo(
-          plate,
-          { scale: 1.02 },
-          {
-            scale: 1.2,
-            ease: "none",
-            scrollTrigger: { trigger: root.current, start: "top bottom", end: "bottom top", scrub: true },
-          }
-        );
-      }
+      // Frame stays still — the clip provides the motion. No scroll zoom here.
       return () => ScrollTrigger.getAll().forEach((t) => t.kill());
     },
     { scope: root, dependencies: [reduced] }

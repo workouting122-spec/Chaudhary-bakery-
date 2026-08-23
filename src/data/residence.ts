@@ -41,7 +41,7 @@ export const tour: TourStop[] = [
       { label: "Elevation", value: "Board-formed concrete" },
       { label: "Approach", value: "120 m private drive" },
     ],
-    // media: "/assets/tour/exterior.mp4",
+    media: "/assets/tour/exterior.mp4",
   },
   {
     id: "entrance",
@@ -132,5 +132,6 @@ export const tour: TourStop[] = [
       { label: "Pool", value: "18 m infinity edge" },
       { label: "Cantilever", value: "6 m over the slope" },
     ],
+    media: "/assets/tour/terrace.mp4",
   },
 ];
